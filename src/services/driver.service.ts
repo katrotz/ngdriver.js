@@ -12,14 +12,15 @@ export class DriverService extends Driver {
   }
 
   addTourStep(title: string, step: Driver.Step, stepIndex: number = 0): DriverService {
+      const element = step.element;
       const tour = this.getTour(title) || this.createTour(title);
-      const stepExists = false;
+      const stepExists = Boolean(tour.steps.find((s) => (s && s.element === element)));
 
       if (stepExists) {
           this.$log.warn(`The step index ${stepIndex} of the tour "${title}" was overriden`);
       }
 
-      tour.steps.splice(stepIndex, 0, step); // TODO Implement step ordering
+      tour.steps[stepIndex] = step;
 
       return this;
   }
@@ -47,7 +48,13 @@ export class DriverService extends Driver {
           return this;
       }
 
-      this.defineSteps(tour.steps);
+      if (!tour.steps.length) {
+          throw new Error(`Failed to start the "${tour.title}" tour as no steps were defined`);
+      }
+
+      const steps = tour.steps.filter(step => Boolean(step));
+
+      this.defineSteps(steps);
 
       this.start(stepIndex);
 
