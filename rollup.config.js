@@ -19,7 +19,7 @@ export default {
       extensions: [ '.ts', '.js', '.json' ]
     }),
     babel({
-      exclude: 'node_modules/**'
+      extensions: [ '.ts', '.js', '.json' ]
     })
   ]
 }
