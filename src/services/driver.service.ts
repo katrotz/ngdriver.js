@@ -2,17 +2,22 @@ import angular from 'angular';
 import Driver, { NgDriverTour } from 'driver.js';
 
 export class DriverService extends Driver {
-  private $injector: angular.auto.IInjectorService;
+  private $log: angular.ILogService;
   private driverTours: NgDriverTour[] = [];
 
   constructor($injector: angular.auto.IInjectorService, options: Driver.DriverOptions|undefined) {
     super(options);
 
-    this.$injector = $injector;
+    this.$log = $injector.get('$log');
   }
 
   addTourStep(title: string, step: Driver.Step, stepIndex: number = 0): DriverService {
       const tour = this.getTour(title) || this.createTour(title);
+      const stepExists = false;
+
+      if (stepExists) {
+          this.$log.warn(`The step index ${stepIndex} of the tour "${title}" was overriden`);
+      }
 
       tour.steps.splice(stepIndex, 0, step); // TODO Implement step ordering
 
@@ -31,6 +36,22 @@ export class DriverService extends Driver {
     this.driverTours.push(tour);
 
     return tour;
+  }
+
+  startTour(title: string, stepIndex: number = 0): DriverService {
+      const tour = this.getTour(title);
+
+      if (!tour) {
+          this.$log.error(`Failed to start the tour "${title}" as it was not registered`);
+
+          return this;
+      }
+
+      this.defineSteps(tour.steps);
+
+      this.start(stepIndex);
+
+      return this;
   }
 }
 

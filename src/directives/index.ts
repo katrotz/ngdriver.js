@@ -1,9 +1,9 @@
 import angular from 'angular';
 
-import { driverStepFactory } from "./driver-step.directive";
+import { tourDirectiveFactory } from "./tour.directive";
 
 export default function register(app: angular.IModule) {
-    app.directive('driverStep', driverStepFactory);
+    app.directive('tour', tourDirectiveFactory);
 
     return app;
 };

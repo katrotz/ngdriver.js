@@ -7,9 +7,10 @@ import configApp from './ngdriver.config';
 
 const app = angular.module('ng.driver', []);
 
-configApp(app);
-registerDirectives(app);
-registerServices(app);
-runApp(app);
-
-export default app;
+export default runApp(
+    registerServices(
+        registerDirectives(
+            configApp(app)
+        )
+    )
+);
