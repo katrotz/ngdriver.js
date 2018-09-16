@@ -1,8 +1,8 @@
-import { getDefaultDriverOptions, initApp } from './../../__mocks';
+import { getDriverOptions, initApp } from './../../__mocks';
 
 describe('DriverService', function() {
   describe('provider', function() {
-    const driverOptions = getDefaultDriverOptions();
+    const driverOptions = getDriverOptions();
 
     beforeEach(() => initApp(driverOptions));
 

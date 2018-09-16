@@ -20,19 +20,20 @@ class TourController implements angular.IController {
     }
 
     $onInit() {
-        const element = this.getElementSelector();
+        const newElementId = this.generateElementId();
+        const element = this.$element.attr('id') || `#${newElementId}`;
         const step = Object.assign({ element }, this.tourStepOptions);
+
+        this.$element.attr('id', newElementId);
 
         this.driverService.addTourStep(this.tour, step, this.tourStepIndex);
     }
 
-    getElementSelector() {
-        const attr = Object.assign({ tour: '', tourStepIndex: '' }, this.$attrs.$attr);
+    generateElementId() {
+        const tourIdentifier = this.tour.replace(/\W/g, '-');
+        const stepIdentifier = this.tourStepIndex;
 
-        const tourSelector = `[${attr.tour}="${this.$attrs.tour}"]`;
-        const stepIndexSelector = `[${attr.tourStepIndex}="${this.$attrs.tourStepIndex}"]`;
-
-        return `${tourSelector}${stepIndexSelector}`;
+        return `${tourIdentifier}-${stepIdentifier}`.toLowerCase();
     }
 }
 

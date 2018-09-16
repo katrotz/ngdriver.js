@@ -1,7 +1,7 @@
-import { getDefaultDriverOptions, getDirectiveTemplate, initApp } from './../../__mocks';
+import { getDriverOptions, getDirectiveTemplate, initApp } from './../../__mocks';
 
 describe('TourDirective', function() {
-  const driverOptions = getDefaultDriverOptions();
+  const driverOptions = getDriverOptions();
   const directiveTemplate = getDirectiveTemplate();
 
   beforeEach(() => initApp(driverOptions));
