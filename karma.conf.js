@@ -1,6 +1,7 @@
 module.exports = function(config, specificOptions) {
   config.set({
     files: [
+      'node_modules/driver.js/dist/driver.min.css',
       'node_modules/driver.js/dist/driver.min.js',
       'node_modules/angular/angular.js',
       'node_modules/angular-mocks/angular-mocks.js',
@@ -38,26 +39,6 @@ module.exports = function(config, specificOptions) {
         })
       ]
     },
-    /*rollupPreprocessor: {
-      external: [ 'angular', 'driver.js' ],
-      plugins: [
-        require('rollup-plugin-node-resolve')({
-          extensions: [ '.ts', '.js', '.json' ]
-        }),
-        require('rollup-plugin-babel')({
-          exclude: 'node_modules/!**'
-        })
-      ],
-      output: {
-        format: 'iife',
-        name: 'ngdriver',
-        sourcemap: 'inline',
-        globals: {
-          angular: 'angular',
-          'driver.js': 'Driver'
-        }
-      }
-    },*/
     mime: {
       'text/x-typescript': ['ts','tsx']
     },
@@ -67,6 +48,7 @@ module.exports = function(config, specificOptions) {
     logColors: true,
     browsers: [
       'ChromeHeadless'
+      // 'Chrome'
     ],
     browserDisconnectTimeout: 10000,
     browserDisconnectTolerance: 2,
