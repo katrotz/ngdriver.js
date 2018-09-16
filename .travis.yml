@@ -29,6 +29,11 @@ notifications:
 script:
 - npm run test:ci
 - npm run build:prod
+addons:
+  chrome: stable
+before_install:
+- # start your web application and listen on `localhost`
+- google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 env:
   global:
     secure: k6uLCmvpo2hu7izybCP0Y8U73LzuCdP3Xsc4j9abY3QJrA0Gqu6NFZpdQHVRxOT7boK3xfw/xy+AxKeQhDnRA3Jr/kjb68vh3rxmd0WV0BNQxmllY9f+5rmaMiFWP5DmY9D5YNRsSbfsFQtr9byR+IxiNRD8csrdnKgaXVusbB1jY6u2B/wdZMIbk0udZte5Ur7FEDWFxUX6EGgZbL/7CQRD1c8vVPvEYvtFhdVVHhXE5FQqMlY81W1P5Nr7faXbBMnJ7QzAFXDyMRXkH9qSVGblnXKNNVMzCJLmQY57clXl+Xs7+Qh9i/F2IcSoPvRg2iTad8VTD0nkLCO4CgteEDO53QZgLUNV1lmT03Jd2jK0HU90a5dDB72YA4IbEwVB0sqe7LyuA5AmK1L3Q/xHWf8CbyJObqjo2CdaNbg0pTMhQC2fD/UvznqQ4EbHCSYJrHunz6IE+HLXe3YV85Qtl35eT58WaVAT+9iEVGCAXS3fEN80laOVXw0zyVBkOXN0ZoG/w8eM9Oy5wsYZf6PgtZ/ioGGbxd962jjN6eoVu1EUkoClbHH1wvKmiZuMpGsgutzP1FBSKjwrNCzDizqV82BFVIF1X5avbYREhIIy9m/hVb6KMvDsIMaKd/5MYrUNu4I02FRAdWsX8IlGDvO/w6OUIreteQeLFvqW8qhYdlc=
