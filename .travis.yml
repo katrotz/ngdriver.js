@@ -1,0 +1,34 @@
+sudo: false
+language: node_js
+node_js:
+- 8
+before_deploy:
+- touch .npmignore
+- git config --local user.name "Travis CI"
+- git config --local user.email "travis@travis-ci.org"
+- git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+deploy:
+  provider: npm
+  email: katrotz@gmail.com
+  api_key: $NPM_API_KEY
+  skip_cleanup: true
+  tag: next
+  on:
+    node: 8
+    branch: master
+    tags: true
+cache:
+  directories:
+  - node_modules
+notifications:
+  email:
+    recipients:
+    - katrotz@gmail.com
+    on_success: change
+    on_failure: always
+script:
+- npm run test:ci
+- npm run build:prod
+env:
+  global:
+    secure: k6uLCmvpo2hu7izybCP0Y8U73LzuCdP3Xsc4j9abY3QJrA0Gqu6NFZpdQHVRxOT7boK3xfw/xy+AxKeQhDnRA3Jr/kjb68vh3rxmd0WV0BNQxmllY9f+5rmaMiFWP5DmY9D5YNRsSbfsFQtr9byR+IxiNRD8csrdnKgaXVusbB1jY6u2B/wdZMIbk0udZte5Ur7FEDWFxUX6EGgZbL/7CQRD1c8vVPvEYvtFhdVVHhXE5FQqMlY81W1P5Nr7faXbBMnJ7QzAFXDyMRXkH9qSVGblnXKNNVMzCJLmQY57clXl+Xs7+Qh9i/F2IcSoPvRg2iTad8VTD0nkLCO4CgteEDO53QZgLUNV1lmT03Jd2jK0HU90a5dDB72YA4IbEwVB0sqe7LyuA5AmK1L3Q/xHWf8CbyJObqjo2CdaNbg0pTMhQC2fD/UvznqQ4EbHCSYJrHunz6IE+HLXe3YV85Qtl35eT58WaVAT+9iEVGCAXS3fEN80laOVXw0zyVBkOXN0ZoG/w8eM9Oy5wsYZf6PgtZ/ioGGbxd962jjN6eoVu1EUkoClbHH1wvKmiZuMpGsgutzP1FBSKjwrNCzDizqV82BFVIF1X5avbYREhIIy9m/hVb6KMvDsIMaKd/5MYrUNu4I02FRAdWsX8IlGDvO/w6OUIreteQeLFvqW8qhYdlc=
