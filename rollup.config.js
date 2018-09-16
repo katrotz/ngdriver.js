@@ -1,11 +1,14 @@
 import resolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
+import { uglify } from "rollup-plugin-uglify";
+
+const production = process.env.BUILD === 'production';
 
 export default {
   input: 'src/ngdriver.module.ts',
   output: {
     name: 'ngdriver',
-    file: 'lib/ngdriver.js',
+    file: `lib/ngdriver${production ? '.min' : ''}.js`,
     format: 'umd',
     sourcemap: true,
     globals: {
@@ -20,6 +23,7 @@ export default {
     }),
     babel({
       extensions: [ '.ts', '.js', '.json' ]
-    })
+    }),
+    production && uglify()
   ]
 }
