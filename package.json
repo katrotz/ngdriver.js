@@ -24,7 +24,7 @@
     "url": "https://github.com/katrotz/ngdriver.js/issues"
   },
   "homepage": "https://github.com/katrotz/ngdriver.js#readme",
-  "dependencies": {
+  "peerDependencies": {
     "driver.js": "0.7.1"
   },
   "devDependencies": {
@@ -39,6 +39,7 @@
     "angular": "1.7.3",
     "angular-mocks": "1.7.3",
     "babel-preset-env": "1.7.0",
+    "driver.js": "0.7.1",
     "jasmine-core": "3.2.1",
     "karma": "3.0.0",
     "karma-chrome-launcher": "2.2.0",
